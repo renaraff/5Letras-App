@@ -4,7 +4,9 @@ import React from 'react'
 export default function Teste() {
   return (
     <View>
-      <Text>OIiiiiii</Text>
+      <Text>OIiiiiii
+        oirr
+      </Text>
     </View>
   )
 }
