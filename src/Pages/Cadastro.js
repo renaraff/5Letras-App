@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-
 export default function Cadastro() {
   const [selectedRole, setSelectedRole] = useState(null);
   const [agreeTerms, setAgreeTerms] = useState(false);
@@ -10,10 +9,10 @@ export default function Cadastro() {
     <View style={styles.container}>
       <Text style={styles.title}>Cadastre-se aqui</Text>
 
-      <TextInput style={styles.input} placeholder="Nome" placeholderTextColor="#6B6B6B" />
-      <TextInput style={styles.input} placeholder="E-mail" placeholderTextColor="#6B6B6B" keyboardType="email-address" />
-      <TextInput style={styles.input} placeholder="Senha" placeholderTextColor="#6B6B6B" secureTextEntry />
-      <TextInput style={styles.input} placeholder="Confirmar Senha" placeholderTextColor="#6B6B6B" secureTextEntry />
+      <TextInput style={styles.input} placeholder="Nome" placeholderTextColor="#A9A9A9" />
+      <TextInput style={styles.input} placeholder="E-mail" placeholderTextColor="#A9A9A9" keyboardType="email-address" />
+      <TextInput style={styles.input} placeholder="Senha" placeholderTextColor="#A9A9A9" secureTextEntry />
+      <TextInput style={styles.input} placeholder="Confirmar Senha" placeholderTextColor="#A9A9A9" secureTextEntry />
 
       <Text style={styles.label}>Você é aluno ou professor?</Text>
       <View style={styles.roleContainer}>
@@ -21,28 +20,30 @@ export default function Cadastro() {
           style={[styles.roleButton, selectedRole === 'Aluno' && styles.selectedAluno]}
           onPress={() => setSelectedRole('Aluno')}
         >
-          <Text style={[styles.roleText, selectedRole === 'Aluno' && styles.selectedRoleText]}>Aluno</Text>
+          <Text style={[styles.roleText, selectedRole === 'Aluno' && styles.selectedText]}>Aluno</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.roleButton, selectedRole === 'Professor' && styles.selectedProfessor]}
           onPress={() => setSelectedRole('Professor')}
         >
-          <Text style={[styles.roleText, selectedRole === 'Professor' && styles.selectedRoleText]}>Professor</Text>
+          <Text style={[styles.roleText, selectedRole === 'Professor' && styles.selectedText]}>Professor</Text>
         </TouchableOpacity>
       </View>
 
       <TextInput
         style={styles.input}
         placeholder="Anexe seu certificado de graduação"
-        placeholderTextColor="#6B6B6B"
+        placeholderTextColor="#A9A9A9"
       />
 
       <View style={styles.termsContainer}>
-      
+        
+       
+
         <Text style={styles.termsText}>Li e concordo com os termos e condições</Text>
       </View>
 
-      <TouchableOpacity style={styles.button} disabled={!agreeTerms}>
+      <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>CRIAR CONTA</Text>
       </TouchableOpacity>
     </View>
@@ -59,19 +60,18 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: 'bold',
     color: '#333',
     marginBottom: 20,
   },
   input: {
     width: '100%',
     padding: 15,
-    borderRadius: 25,
-    backgroundColor: '#F9F9F9',
-    borderColor: '#BEBEBE',
+    borderRadius: 8,
+    backgroundColor: '#FFF',
+    borderColor: '#A9A9A9',
     borderWidth: 1,
     marginBottom: 10,
-    color: '#333',
   },
   label: {
     fontSize: 16,
@@ -88,8 +88,7 @@ const styles = StyleSheet.create({
   roleButton: {
     flex: 1,
     padding: 12,
-    borderRadius: 25,
-    backgroundColor: '#F0F0F0',
+    borderRadius: 8,
     marginHorizontal: 5,
     alignItems: 'center',
   },
@@ -101,32 +100,32 @@ const styles = StyleSheet.create({
   },
   roleText: {
     fontSize: 16,
-    color: '#6B6B6B',
+    color: '#A9A9A9',
   },
-  selectedRoleText: {
+  selectedText: {
     color: '#FFF',
-    fontWeight: '600',
   },
   termsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
   },
+  checkbox: {
+    marginRight: 10,
+  },
   termsText: {
-    color: '#6B6B6B',
-    marginLeft: 10,
+    color: '#A9A9A9',
   },
   button: {
     width: '100%',
     padding: 15,
-    borderRadius: 25,
+    borderRadius: 8,
     backgroundColor: '#A020F0',
     alignItems: 'center',
-    opacity: 0.9,
   },
   buttonText: {
     color: '#FFF',
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: 'bold',
   },
 });
