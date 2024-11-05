@@ -1,92 +1,107 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react'
+import {View,Text,TextInput,TouchableOpacity,StyleSheet,} from 'react-native';
 import { AuthContext } from '../Context/AuthContext';
 
 export default function Cadastro() {
-  const { setLogin, setCadastro } = useContext(AuthContext);
 
-  const [nome, setNome] = useState();
-  const [telefone, setTelefone] = useState();
-  const [email, setEmail] = useState();
-  const [senha, setSenha] = useState();
+  const [isAluno, setIsAluno] = useState(true);
+  const [isProfessor, setIsProfessor] = useState(false);
+    const { setLogin, setCadastro } = useContext(AuthContext);
+    const [nome, setNome]  = useState();
+    const [email, setEmail] = useState();
+    const [senha, setSenha] = useState();
+  
 
-  async function postUser() {
-    if (!nome || !telefone || !email || !senha) {
-      Alert.alert('Erro', 'Confira todos os campos e tente novamente.');
-      return;
+    async function postUser() {     
+        
+        if (!nome || !email || !senha ) {
+            Alert.alert('Erro', 'Confira todos os campos e tente novamente.');
+            return;
+        }
+        setCadastro(false);
+        setLogin(false);
+        fetch('http://10.139.75.47:5251/api/Usuarios/CreateUser', {
+          method: 'POST',
+          body: JSON.stringify({
+            UsuarioNome: nome,
+            UsuarioEmail: email,
+            UsuarioSenha: senha
+          }),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+        .then((response) => response.json())
+        .then((json) => console.log(json));    
     }
-    setCadastro(false);
-    setLogin(false);
-    fetch('http://10.139.75.47:5251/api/Usuarios/CreateUser', {
-      method: 'POST',
-      body: JSON.stringify({
-        UsuarioNome: nome,
-        UsuarioTelefone: telefone,
-        UsuarioEmail: email,
-        UsuarioSenha: senha,
-      }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => console.log(json));
-  }
+
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {/* Título */}
-      <Text style={styles.title}>Perdeu o seu pet e deseja encontrá-lo</Text>
-      <Text style={styles.subtitle}>Crie uma conta para acessar o painel de busca de pets</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Cadastre-se aqui</Text>
 
-      {/* Campo de Nome Completo */}
       <TextInput
+        placeholder="Nome"
         style={styles.input}
-        placeholder="Nome Completo"
-        placeholderTextColor="black"
+        placeholderTextColor="#6e6e6e"
         value={nome}
-        onChangeText={(text) => setNome(text)}
+        onChangeText={(digitado) => setNome(digitado)}
       />
 
-      {/* Campo de Telefone */}
       <TextInput
-        style={styles.input}
-        placeholder="Telefone"
-        placeholderTextColor="black"
-        value={telefone}
-        onChangeText={(text) => setTelefone(text)}
-      />
-
-      {/* Campo de E-mail */}
-      <TextInput
-        style={styles.input}
         placeholder="E-mail"
-        placeholderTextColor="black"
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-        keyboardType="email-address"
-      />
-
-      {/* Campo de Senha */}
-      <TextInput
         style={styles.input}
-        placeholder="Senha"
-        secureTextEntry
-        placeholderTextColor="black"
-        value={senha}
-        onChangeText={(text) => setSenha(text)}
+        placeholderTextColor="#6e6e6e"
+        keyboardType="email-address"
+        value={email}
+        onChangeText={(digitado) => setEmail(digitado)}
       />
 
-      {/* Botão de Cadastro */}
-      <TouchableOpacity style={styles.button} onPress={postUser}>
-        <Text style={styles.btnText}>CADASTRAR</Text>
+      <TextInput
+        placeholder="Senha"
+        style={styles.input}
+        placeholderTextColor="#6e6e6e"
+        secureTextEntry
+        value={senha}
+        onChangeText={(digitado) => setSenha(digitado)}
+      />
+
+
+      <Text style={styles.question}>Você é aluno ou professor?</Text>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={[styles.roleButton, isAluno && styles.selectedButton]}
+          onPress={() => {
+            setIsAluno(true);
+            setIsProfessor(false);
+          }}
+        >
+          <Text style={[styles.roleButtonText, isAluno && styles.selectedButtonText]}>Aluno</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.roleButton, isProfessor && styles.selectedButton]}
+          onPress={() => {
+            setIsProfessor(true);
+            setIsAluno(false);
+          }}
+        >
+          <Text style={[styles.roleButtonText, isProfessor && styles.selectedButtonText]}>Professor</Text>
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity style={styles.uploadButton}>
+        <Text style={styles.uploadButtonText}>Anexe seu certificado de graduação</Text>
       </TouchableOpacity>
 
-      {/* Link para Login */}
-      <Text style={styles.cadastroText} onPress={() => { setCadastro(true); setLogin(false); }}>
-        Já possui uma conta? Entre
-      </Text>
-    </ScrollView>
+      <TouchableOpacity style={styles.button} onPress={postUser}>
+                <Text style={styles.btn}>CRIAR CONTA</Text>
+            </TouchableOpacity>
+
+            <Text style={styles.cadastroText} onPress={() => { setCadastro(true); setLogin(false); }}>Já possui uma conta? Entre</Text>
+
+    </View>
   );
 }
 
@@ -95,48 +110,96 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    paddingHorizontal: 30,
+    backgroundColor: '#f9f9f9',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#727272',
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: 14,
-    color: '#727272',
-    textAlign: 'center',
+    color: '#333333',
     marginBottom: 20,
   },
   input: {
-    width: '90%',
+    width: '100%',
     height: 50,
-    borderWidth: 2.5,
-    borderColor: 'rgba(203, 108, 230, 0.24)',
+    borderWidth: 1,
+    borderColor: '#A97A4',
     borderRadius: 10,
-    paddingHorizontal: 20,
-    marginBottom: 20,
+    border: 2,
+    paddingHorizontal: 15,
+    marginBottom: 15,
     fontSize: 16,
-    fontWeight: '400',
+    color: '#333333',
   },
-  button: {
-    width: '90%',
+  question: {
+    fontSize: 14,
+    color: '#6e6e6e',
+    marginBottom: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 15,
+  },
+  roleButton: {
+    flex: 1,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(50, 139, 166, 1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 5,
+  },
+  selectedButton: {
+    backgroundColor: '#8C52FF',
+  },
+  btn: {
+    backgroundColor: '#8C52FF',
+    borderRadius: 20,
+    color: '#ffff',
+    padding: 13,
+    fontWeight: 'bold'
+
+  },
+  roleButtonText: {
+    fontSize: 14,
+    color: '#6e6e6e',
+  },
+  selectedButtonText: {
+    color: '#ffffff',
+  },
+  uploadButton: {
+    width: '100%',
+    height: 40,
+    borderWidth: 1,
+    borderColor: 'rgba(50, 139, 166, 1)',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  uploadButtonText: {
+    fontSize: 14,
+    color: '#6e6e6e',
+  },
+  submitButton: {
+    width: '100%',
     height: 50,
-    backgroundColor: '#6a0dad', // Cor roxa para o botão
+    backgroundColor: '#8C52FF',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
   },
-  btnText: {
-    color: '#fff',
+  submitButtonText: {
+    color: '#ffffff',
     fontSize: 16,
     fontWeight: 'bold',
   },
+  
   cadastroText: {
-    color: '#727272',
+    color: "#727272",
     marginTop: 11,
-    textDecorationLine: 'underline',
-  },
+},
 });
