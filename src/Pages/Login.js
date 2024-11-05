@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   button: {
     width: '90%',
     height: 50,
-    backgroundColor: '#6a0dad', // Cor roxa para o botão
+    backgroundColor: '#6a0dad',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
