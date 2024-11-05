@@ -6,10 +6,7 @@ const ProfileScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.profileCard}>
-        <Image
-          source={{ uri: 'https://via.placeholder.com/100' }} // Substitua pelo URL da imagem da professora
-          style={styles.profileImage}
-        />
+        
         <Text style={styles.title}>Perfil</Text>
         <Text style={styles.description}>
           Meu nome é Valeria Batista da Motta, tenho 52 anos, costumo utilizar exemplos práticos do cotidiano para
@@ -98,7 +95,8 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 15,
+    marginLeft: 121
   },
   review: {
     flexDirection: 'row',
