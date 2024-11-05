@@ -16,9 +16,8 @@ export default function Login() {
     <ScrollView contentContainerStyle={styles.container}>
       {/* Logo */}
       <Image
-        source={{ uri: 'https://via.placeholder.com/190' }} // Substitua pelo URL da imagem do logo
-        style={styles.logo}
-      />
+       source={require("../../assets/Logo.png")} style={styles.logo} />
+
 
       {/* Título */}
       <Text style={styles.title}>Login</Text>
@@ -86,7 +85,7 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 50,
     borderWidth: 2.5,
-    borderColor: 'rgba(203, 108, 230, 0.24)',
+    borderColor: '#5A97A4',
     borderRadius: 10,
     paddingHorizontal: 20,
     marginBottom: 20,
