@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    marginTop: 230
   },
   title: {
     fontSize: 20,
@@ -93,12 +94,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 12,
   },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    marginRight: 12,
-  },
+ 
   favoriteText: {
     fontSize: 14,
     color: '#333333',
