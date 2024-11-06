@@ -24,7 +24,7 @@ export default function Login() {
           style={styles.input}
           value={email}
           onChangeText={(digitado) => setEmail(digitado)}
-          placeholderTextColor="black"
+          placeholderTextColor="#87B2BF"
         />
         <TextInput
           inputMode="text"
@@ -33,7 +33,7 @@ export default function Login() {
           style={styles.input}
           value={senha}
           onChangeText={(digitado) => setSenha(digitado)}
-          placeholderTextColor="black"
+          placeholderTextColor="#87B2BF"
         />
         <TouchableOpacity style={styles.button} onPress={() => RealizaLogin()}>
           <Text style={styles.btnText}>LOGAR</Text>
@@ -96,17 +96,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button: {
-    width: '90%',
+    width: '33%',
     height: 50,
     backgroundColor: '#8C52FF',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 24,
   },
   btnText: {
-    color: '#fff',
-    fontSize: 16,
+   color: 'rgba(255, 255, 255, 0.73)',
     fontWeight: 'bold',
+    fontSize: 16,
   },
   errotext: {
     marginTop: 15,

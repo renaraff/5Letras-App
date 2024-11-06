@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   titulo: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 10,
   },
@@ -67,10 +67,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#555',
     textAlign: 'center',
+    fontStyle: 'italic',
     marginBottom: 10,
   },
   info: {
-    color: '#007bff',
+    color: '#87B2BF',
     textDecorationLine: 'underline',
     textAlign: 'center',
     marginBottom: 10,
@@ -80,14 +81,15 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   subtitulo: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 15,
-    marginLeft: 121
+    marginLeft: '26%'
   },
   avaliacao: {
     flexDirection: 'row',
     alignItems: 'center',
+    fontStyle: 'italic',
     marginBottom: 10,
   },
   avaliacaoinfo: {
@@ -96,6 +98,7 @@ const styles = StyleSheet.create({
   avaliador: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: 'rgba(59, 57, 57, 0.67)'
   },
   avaliacaotext: {
     fontSize: 14,

@@ -50,9 +50,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   materiatext: {
-    color: '#333',
+    color: '#2F8098',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: 'bold',
   },
   separador: {
     height: 1,

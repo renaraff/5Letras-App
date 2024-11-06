@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     marginTop: 230
   },
   titulo: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
     color: '#333333',
     marginBottom: 16,
@@ -63,24 +63,24 @@ const styles = StyleSheet.create({
   },
   info: {
     fontSize: 14,
-    color: '#4EBCB4',
+    color: '#87B2BF',
     marginBottom: 4,
   },
   button: {
     backgroundColor: '#A653EB',
-    borderRadius: 8,
+    borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginTop: 16,
     marginBottom: 24,
   },
   buttontext: {
-    color: '#FFFFFF',
+    color: 'rgba(255, 255, 255, 0.73)',
     fontWeight: 'bold',
     fontSize: 16,
   },
   subtitulo: {
-    fontSize: 18,
+    fontSize: 30,
     fontWeight: 'bold',
     color: '#333333',
     marginBottom: 12,

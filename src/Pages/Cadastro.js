@@ -1,39 +1,39 @@
 import React, { useContext, useState } from 'react'
-import {View,Text,TextInput,TouchableOpacity,StyleSheet,} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, } from 'react-native';
 import { AuthContext } from '../Context/AuthContext';
 
 export default function Cadastro() {
 
   const [isAluno, setIsAluno] = useState(true);
   const [isProfessor, setIsProfessor] = useState(false);
-    const { setLogin, setCadastro } = useContext(AuthContext);
-    const [nome, setNome]  = useState();
-    const [email, setEmail] = useState();
-    const [senha, setSenha] = useState();
-  
+  const { setLogin, setCadastro } = useContext(AuthContext);
+  const [nome, setNome] = useState();
+  const [email, setEmail] = useState();
+  const [senha, setSenha] = useState();
 
-    async function postUser() {     
-        
-        if (!nome || !email || !senha ) {
-            Alert.alert('Erro', 'Confira todos os campos e tente novamente.');
-            return;
-        }
-        setCadastro(false);
-        setLogin(false);
-        fetch('http://10.139.75.47:5251/api/Usuarios/CreateUser', {
-          method: 'POST',
-          body: JSON.stringify({
-            UsuarioNome: nome,
-            UsuarioEmail: email,
-            UsuarioSenha: senha
-          }),
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        })
-        .then((response) => response.json())
-        .then((json) => console.log(json));    
+
+  async function postUser() {
+
+    if (!nome || !email || !senha) {
+      Alert.alert('Erro', 'Confira todos os campos e tente novamente.');
+      return;
     }
+    setCadastro(false);
+    setLogin(false);
+    fetch('http://10.139.75.47:5251/api/Usuarios/CreateUser', {
+      method: 'POST',
+      body: JSON.stringify({
+        UsuarioNome: nome,
+        UsuarioEmail: email,
+        UsuarioSenha: senha
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
+  }
 
 
   return (
@@ -42,14 +42,14 @@ export default function Cadastro() {
       <TextInput
         placeholder="Nome"
         style={styles.input}
-        placeholderTextColor="#6e6e6e"
+        placeholderTextColor="#87B2BF"
         value={nome}
         onChangeText={(digitado) => setNome(digitado)}
       />
       <TextInput
         placeholder="E-mail"
         style={styles.input}
-        placeholderTextColor="#6e6e6e"
+        placeholderTextColor="#87B2BF"
         keyboardType="email-address"
         value={email}
         onChangeText={(digitado) => setEmail(digitado)}
@@ -57,7 +57,7 @@ export default function Cadastro() {
       <TextInput
         placeholder="Senha"
         style={styles.input}
-        placeholderTextColor="#6e6e6e"
+        placeholderTextColor="#87B2BF"
         secureTextEntry
         value={senha}
         onChangeText={(digitado) => setSenha(digitado)}
@@ -86,9 +86,9 @@ export default function Cadastro() {
         <Text style={styles.btnanexotext}>Anexe seu certificado de graduação</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={postUser}>
-                <Text style={styles.btn}>CRIAR CONTA</Text>
-            </TouchableOpacity>
-            <Text style={styles.cadastroText} onPress={() => { setCadastro(true); setLogin(false); }}>Já possui uma conta? Entre</Text>
+        <Text style={styles.btn}>CRIAR CONTA</Text>
+      </TouchableOpacity>
+      <Text style={styles.cadastroText} onPress={() => { setCadastro(true); setLogin(false); }}>Já possui uma conta? Entre</Text>
     </View>
   );
 }
@@ -96,12 +96,12 @@ export default function Cadastro() {
 const styles = StyleSheet.create({
   container: {
     marginTop: '40%',
-    marginLeft: '1.4%',
+    marginLeft: '4%',
     backgroundColor: '#fff',
     borderRadius: 10,
     padding: 20,
     alignItems: 'center',
-    width: '100%',
+    width: '93%',
     maxWidth: 400,
     elevation: 4,
     shadowColor: '#000',
@@ -151,10 +151,10 @@ const styles = StyleSheet.create({
   btnselecionado: {
     backgroundColor: '#8C52FF',
     borderWidth: 2.5,
-    borderColor: '#5A97A4',
+    borderColor: '#8C52FF',
   },
   btn: {
-    color: '#ffff',
+    color: 'rgba(255, 255, 255, 0.73)',
     fontWeight: 'bold'
 
   },
@@ -173,13 +173,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 15,
+    marginTop: 14,
+    marginBottom: 30,
   },
   btnanexotext: {
     fontSize: 14,
     color: '#6e6e6e',
   },
-  button:{
+  button: {
     width: '40%',
     height: 50,
     backgroundColor: '#8C52FF',
@@ -190,5 +191,7 @@ const styles = StyleSheet.create({
   cadastroText: {
     color: "#727272",
     marginTop: 11,
-},
+    fontStyle: 'italic',
+    textDecorationLine: 'underline',
+  },
 });

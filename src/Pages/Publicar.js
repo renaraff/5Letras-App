@@ -32,12 +32,13 @@ const styles = StyleSheet.create({
   },
   subtitulo: {
     fontSize: 14,
-    color: '#666666',
+    color: '#6440AC',
+    fontStyle: 'italic',
     marginBottom: 16,
   },
   materia: {
     borderWidth: 1,
-    borderColor: '#5A97A4',
+    borderColor: '#6440AC',
     borderRadius: 8,
     width: '100%',
     marginBottom: 16,
