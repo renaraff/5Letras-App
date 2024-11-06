@@ -2,36 +2,27 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function SubjectsScreen() {
-  // Dados simulados para as matérias
+export default function Materias() {
   const subjects = [
-    { id: '1', name: 'Literatura' },
-    { id: '2', name: 'Gramática' },
-    { id: '3', name: 'Redação' },
-    { id: '4', name: 'Literatura' },
-    { id: '5', name: 'Gramática' },
-    { id: '6', name: 'Redação' },
+    { id: '1', nome: 'Literatura' },
+    { id: '2', nome: 'Gramática' },
+    { id: '3', nome: 'Redação' },
   ];
 
   return (
     <View style={styles.container}>
-      {/* Título */}
       <Text style={styles.title}>Matérias</Text>
-
-      {/* Lista de Matérias */}
       <FlatList
         data={subjects}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.subjectItem}>
-            <Text style={styles.subjectText}>{item.name}</Text>
+          <TouchableOpacity style={styles.materia}>
+            <Text style={styles.materiatext}>{item.nome}</Text>
             <Icon name="chevron-forward-outline" size={18} color="#6B6B6B" />
           </TouchableOpacity>
         )}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
+        ItemSeparatorComponent={() => <View style={styles.separador} />}
       />
-
-   
     </View>
   );
 }
@@ -49,7 +40,7 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 15,
   },
-  subjectItem: {
+  materia: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -58,12 +49,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
     borderRadius: 8,
   },
-  subjectText: {
+  materiatext: {
     color: '#333',
     fontSize: 16,
     fontWeight: '500',
   },
-  separator: {
+  separador: {
     height: 1,
     backgroundColor: '#E0E0E0',
     marginVertical: 5,

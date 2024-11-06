@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { View, Text, TextInput, StyleSheet, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function HomeScreen() {
+export default function Home() {
 
   const posts = [
     {
       id: '1',
-      username: 'User897658',
-      category: 'Enem',
-      content: 'Enquanto fazia provas de edições passadas do enem me surgiu essa dúvida, em português todas as questões são muito ambíguas. Vocês têm alguma dica ou canal que recomendem pra melhorar na parte de linguagens do enem?',
+      user: 'User897658',
+      categoria: 'Enem',
+      assunto: 'Enquanto fazia provas de edições passadas do enem me surgiu essa dúvida, em português todas as questões são muito ambíguas. Vocês têm alguma dica ou canal que recomendem pra melhorar na parte de linguagens do enem?',
     },
     {
       id: '2',
-      username: 'User897658',
-      category: 'Enem',
-      content: 'Enquanto fazia provas de edições passadas do enem me surgiu essa dúvida, em português todas as questões são muito ambíguas. Vocês têm alguma dica ou canal que recomendem pra melhorar na parte de linguagens do enem?',
+      user: 'User897658',
+      categoria: 'Enem',
+      assunto: 'Enquanto fazia provas de edições passadas do enem me surgiu essa dúvida, em português todas as questões são muito ambíguas. Vocês têm alguma dica ou canal que recomendem pra melhorar na parte de linguagens do enem?',
     },
  
   ];
@@ -23,9 +23,9 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       {}
-      <View style={styles.searchContainer}>
-        <TextInput style={styles.searchInput} placeholder="Pesquisar" placeholderTextColor="#6B6B6B" />
-        <Icon name="search" size={20} color="#6B6B6B" style={styles.searchIcon} />
+      <View style={styles.pesquisacaixa}>
+        <TextInput style={styles.pesquisa} placeholder="Pesquisar" placeholderTextColor="#6B6B6B" />
+        <Icon name="search" size={20} color="#6B6B6B" style={styles.pesquisaicon} />
       </View>
 
       {}
@@ -33,19 +33,17 @@ export default function HomeScreen() {
         data={posts}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.postCard}>
-            <Text style={styles.username}>{item.username}</Text>
-            <Text style={styles.category}>• {item.category}</Text>
-            <Text style={styles.content}>{item.content}</Text>
-            <View style={styles.iconRow}>
+          <View style={styles.caixa}>
+            <Text style={styles.user}>{item.user}</Text>
+            <Text style={styles.categoria}>• {item.categoria}</Text>
+            <Text style={styles.assunto}>{item.assunto}</Text>
+            <View style={styles.iconcaixa}>
               <Icon name="chatbubble-outline" size={20} color="#6B6B6B" style={styles.icon} />
               <Icon name="heart-outline" size={20} color="#6B6B6B" style={styles.icon} />
             </View>
           </View>
         )}
       />
-
-  
     </View>
   );
 }
@@ -57,7 +55,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingHorizontal: 20,
   },
-  searchContainer: {
+  pesquisacaixa: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#F9F9F9',
@@ -67,15 +65,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#BEBEBE',
   },
-  searchInput: {
+  pesquisa: {
     flex: 1,
     paddingVertical: 10,
     color: '#333',
   },
-  searchIcon: {
+  pesquisaicon: {
     marginLeft: 10,
   },
-  postCard: {
+  caixa: {
     backgroundColor: '#F5F5F5',
     borderRadius: 15,
     padding: 15,
@@ -86,22 +84,22 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 10,
   },
-  username: {
+  user: {
     color: '#A020F0',
     fontWeight: '600',
     fontSize: 14,
   },
-  category: {
+  categoria: {
     color: '#A020F0',
     fontSize: 12,
     marginBottom: 5,
   },
-  content: {
+  assunto: {
     color: '#333',
     fontSize: 14,
     marginBottom: 10,
   },
-  iconRow: {
+  iconcaixa: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,

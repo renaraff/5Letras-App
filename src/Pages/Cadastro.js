@@ -38,8 +38,7 @@ export default function Cadastro() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Cadastre-se aqui</Text>
-
+      <Text style={styles.titulo}>Cadastre-se aqui</Text>
       <TextInput
         placeholder="Nome"
         style={styles.input}
@@ -47,7 +46,6 @@ export default function Cadastro() {
         value={nome}
         onChangeText={(digitado) => setNome(digitado)}
       />
-
       <TextInput
         placeholder="E-mail"
         style={styles.input}
@@ -56,7 +54,6 @@ export default function Cadastro() {
         value={email}
         onChangeText={(digitado) => setEmail(digitado)}
       />
-
       <TextInput
         placeholder="Senha"
         style={styles.input}
@@ -65,56 +62,55 @@ export default function Cadastro() {
         value={senha}
         onChangeText={(digitado) => setSenha(digitado)}
       />
-
-
-      <Text style={styles.question}>Você é aluno ou professor?</Text>
-
-      <View style={styles.buttonContainer}>
+      <Text style={styles.pergunta}>Você é aluno ou professor?</Text>
+      <View style={styles.btncaixa}>
         <TouchableOpacity
-          style={[styles.roleButton, isAluno && styles.selectedButton]}
+          style={[styles.btnescolha, isAluno && styles.btnselecionado]}
           onPress={() => {
             setIsAluno(true);
             setIsProfessor(false);
-          }}
-        >
-          <Text style={[styles.roleButtonText, isAluno && styles.selectedButtonText]}>Aluno</Text>
+          }}>
+          <Text style={[styles.btntext, isAluno && styles.btnselecionadotext]}>Aluno</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.roleButton, isProfessor && styles.selectedButton]}
+          style={[styles.btnescolha, isProfessor && styles.btnselecionado]}
           onPress={() => {
             setIsProfessor(true);
             setIsAluno(false);
-          }}
-        >
-          <Text style={[styles.roleButtonText, isProfessor && styles.selectedButtonText]}>Professor</Text>
+          }}>
+          <Text style={[styles.btntext, isProfessor && styles.btnselecionadotext]}>Professor</Text>
         </TouchableOpacity>
       </View>
-
-      <TouchableOpacity style={styles.uploadButton}>
-        <Text style={styles.uploadButtonText}>Anexe seu certificado de graduação</Text>
+      <TouchableOpacity style={styles.btnanexo}>
+        <Text style={styles.btnanexotext}>Anexe seu certificado de graduação</Text>
       </TouchableOpacity>
-
       <TouchableOpacity style={styles.button} onPress={postUser}>
                 <Text style={styles.btn}>CRIAR CONTA</Text>
             </TouchableOpacity>
-
             <Text style={styles.cadastroText} onPress={() => { setCadastro(true); setLogin(false); }}>Já possui uma conta? Entre</Text>
-
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    marginTop: '40%',
+    marginLeft: '1.4%',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 20,
     alignItems: 'center',
-    paddingHorizontal: 30,
-    backgroundColor: '#f9f9f9',
+    width: '100%',
+    maxWidth: 400,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
-  title: {
-    fontSize: 24,
+  titulo: {
+    fontSize: 30,
     fontWeight: 'bold',
     color: '#333333',
     marginBottom: 20,
@@ -122,8 +118,8 @@ const styles = StyleSheet.create({
   input: {
     width: '100%',
     height: 50,
-    borderWidth: 1,
-    borderColor: '#A97A4',
+    borderWidth: 2.5,
+    borderColor: '#5A97A4',
     borderRadius: 10,
     border: 2,
     paddingHorizontal: 15,
@@ -131,73 +127,66 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333333',
   },
-  question: {
+  pergunta: {
     fontSize: 14,
     color: '#6e6e6e',
     marginBottom: 10,
   },
-  buttonContainer: {
+  btncaixa: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
     marginBottom: 15,
   },
-  roleButton: {
+  btnescolha: {
     flex: 1,
     height: 40,
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(50, 139, 166, 1)',
+    borderWidth: 2.5,
+    borderColor: '#5A97A4',
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 5,
   },
-  selectedButton: {
+  btnselecionado: {
     backgroundColor: '#8C52FF',
+    borderWidth: 2.5,
+    borderColor: '#5A97A4',
   },
   btn: {
-    backgroundColor: '#8C52FF',
-    borderRadius: 20,
     color: '#ffff',
-    padding: 13,
     fontWeight: 'bold'
 
   },
-  roleButtonText: {
+  btntext: {
     fontSize: 14,
     color: '#6e6e6e',
   },
-  selectedButtonText: {
+  btnselecionadotext: {
     color: '#ffffff',
   },
-  uploadButton: {
+  btnanexo: {
     width: '100%',
     height: 40,
-    borderWidth: 1,
-    borderColor: 'rgba(50, 139, 166, 1)',
+    borderWidth: 2.5,
+    borderColor: '#5A97A4',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 15,
   },
-  uploadButtonText: {
+  btnanexotext: {
     fontSize: 14,
     color: '#6e6e6e',
   },
-  submitButton: {
-    width: '100%',
+  button:{
+    width: '40%',
     height: 50,
     backgroundColor: '#8C52FF',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 24,
   },
-  submitButtonText: {
-    color: '#ffffff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  
   cadastroText: {
     color: "#727272",
     marginTop: 11,

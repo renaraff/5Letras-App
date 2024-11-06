@@ -14,51 +14,41 @@ export default function Login() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Logo */}
       <Image
-       source={require("../../assets/Logo.png")} style={styles.logo} />
+        source={require("../../assets/Logo.png")} style={styles.logo} />
+      <View style={styles.caixa}>
+        <Text style={styles.titulo}>Login</Text>
+        <TextInput
+          inputMode="email"
+          placeholder="E-mail"
+          style={styles.input}
+          value={email}
+          onChangeText={(digitado) => setEmail(digitado)}
+          placeholderTextColor="black"
+        />
+        <TextInput
+          inputMode="text"
+          placeholder="Senha"
+          secureTextEntry={true}
+          style={styles.input}
+          value={senha}
+          onChangeText={(digitado) => setSenha(digitado)}
+          placeholderTextColor="black"
+        />
+        <TouchableOpacity style={styles.button} onPress={() => RealizaLogin()}>
+          <Text style={styles.btnText}>LOGAR</Text>
+        </TouchableOpacity>
 
+        {error && (
+          <View style={styles.erro}>
+            <Text style={styles.errotext}>Confire se seus dados estão corretos e tente novamente.</Text>
+          </View>
+        )}
 
-      {/* Título */}
-      <Text style={styles.title}>Login</Text>
-
-      {/* Campo de E-mail */}
-      <TextInput
-        inputMode="email"
-        placeholder="E-mail"
-        style={styles.input}
-        value={email}
-        onChangeText={(digitado) => setEmail(digitado)}
-        placeholderTextColor="black"
-      />
-
-      {/* Campo de Senha */}
-      <TextInput
-        inputMode="text"
-        placeholder="Senha"
-        secureTextEntry={true}
-        style={styles.input}
-        value={senha}
-        onChangeText={(digitado) => setSenha(digitado)}
-        placeholderTextColor="black"
-      />
-
-      {/* Botão de Login */}
-      <TouchableOpacity style={styles.button} onPress={() => RealizaLogin()}>
-        <Text style={styles.btnText}>LOGAR</Text>
-      </TouchableOpacity>
-
-      {/* Exibição de Erro */}
-      {error && (
-        <View style={styles.error}>
-          <Text style={styles.errorText}>Confire se seus dados estão corretos e tente novamente.</Text>
-        </View>
-      )}
-
-      {/* Link para Cadastro */}
-      <Text style={styles.cadastroText} onPress={() => { setCadastro(true); setLogin(true); }}>
-        Não tem conta? Cadastre-se
-      </Text>
+        <Text style={styles.cadastrotext} onPress={() => { setCadastro(true); setLogin(true); }}>
+          Não tem conta? Cadastre-se
+        </Text>
+      </View>
     </ScrollView>
   );
 }
@@ -70,13 +60,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
+  caixa: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 15,
+    alignItems: 'center',
+    width: '90%',
+    maxWidth: 400,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+  },
   logo: {
     width: 190,
     height: 190,
     marginBottom: 20,
   },
-  title: {
-    fontSize: 24,
+  titulo: {
+    fontSize: 30,
     fontWeight: 'bold',
     color: '#727272',
     marginBottom: 20,
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
   button: {
     width: '90%',
     height: 50,
-    backgroundColor: '#6a0dad',
+    backgroundColor: '#8C52FF',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
@@ -105,13 +108,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  errorText: {
+  errotext: {
     marginTop: 15,
     fontSize: 16,
     color: 'red',
     textAlign: 'center',
   },
-  cadastroText: {
+  cadastrotext: {
     color: "#727272",
     marginTop: 11,
     textDecorationLine: 'underline',

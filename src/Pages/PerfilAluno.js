@@ -1,32 +1,28 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
-export default function Perfil() {
+export default function PerfilAluno() {
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <Text style={styles.title}>Perfil</Text>
+      <View style={styles.caixa}>
+        <Text style={styles.titulo}>Perfil</Text>
         
-        <Text style={styles.sectionTitle}>Informações pessoais</Text>
-        <Text style={styles.infoText}>Nome: Gyuliana da Silva Fávaro</Text>
-        <Text style={styles.infoText}>E-mail: favorogyuliana@gmail.com</Text>
+        <Text style={styles.caixatitulo}>Informações pessoais</Text>
+        <Text style={styles.info}>Nome: Gyuliana da Silva Fávaro</Text>
+        <Text style={styles.info}>E-mail: favorogyuliana@gmail.com</Text>
 
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>EDITAR PERFIL</Text>
+          <Text style={styles.buttontext}>EDITAR PERFIL</Text>
         </TouchableOpacity>
 
-        <Text style={styles.subTitle}>Favoritos</Text>
+        <Text style={styles.subtitulo}>Favoritos</Text>
         
-        <View style={styles.favoriteItem}>
-          <Image
-            source={{ uri: 'https://example.com/path/to/image1.jpg' }}
-            style={styles.avatar}
-          />
-          <Text style={styles.favoriteText}>Valéria Motta</Text>
+        <View style={styles.favorito}>
+          <Text style={styles.favoritotext}>Valéria Motta</Text>
         </View>
 
-        <View style={styles.favoriteItem}>
-          <Text style={styles.favoriteText}>Adriana Paderes</Text>
+        <View style={styles.favorito}>
+          <Text style={styles.favoritotext}>Adriana Paderes</Text>
         </View>
       </View>
     </View>
@@ -40,7 +36,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
   },
-  card: {
+  caixa: {
     backgroundColor: '#F7F7F7',
     borderRadius: 12,
     padding: 20,
@@ -53,19 +49,19 @@ const styles = StyleSheet.create({
     elevation: 3,
     marginTop: 230
   },
-  title: {
+  titulo: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#333333',
     marginBottom: 16,
   },
-  sectionTitle: {
+  caixatitulo: {
     fontSize: 14,
     color: '#666666',
     marginBottom: 8,
     fontStyle: 'italic',
   },
-  infoText: {
+  info: {
     fontSize: 14,
     color: '#4EBCB4',
     marginBottom: 4,
@@ -78,24 +74,24 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 24,
   },
-  buttonText: {
+  buttontext: {
     color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: 16,
   },
-  subTitle: {
+  subtitulo: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333333',
     marginBottom: 12,
   },
-  favoriteItem: {
+  favorito: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 12,
   },
  
-  favoriteText: {
+  favoritotext: {
     fontSize: 14,
     color: '#333333',
   },

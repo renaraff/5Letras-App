@@ -5,27 +5,27 @@ import { Ionicons } from '@expo/vector-icons';
 const data = [
   {
     id: '1',
-    author: 'Valéria',
-    subject: 'Literatura',
-    content: 'No Romantismo os autores valorizam a liberdade e expressam sentimento nacionalista. É recorrente na poesia e na prosa românticas a idealização da mulher e do amor, além da expressão do sofrimento amoroso. Estão presentes também elementos bucólicos e uma visão teocêntrica.',
+    autor: 'Valéria',
+    assunto: 'Literatura',
+    info: 'No Romantismo os autores valorizam a liberdade e expressam sentimento nacionalista. É recorrente na poesia e na prosa românticas a idealização da mulher e do amor, além da expressão do sofrimento amoroso. Estão presentes também elementos bucólicos e uma visão teocêntrica.',
   },
   {
     id: '2',
-    author: 'Adriana',
-    subject: 'Gramática',
-    content: 'Morfologia são usados como objeto direto, objeto indireto, complemento nominal, agente da passiva e adjunto adverbial.',
+    autor: 'Adriana',
+    assunto: 'Gramática',
+    info: 'Morfologia são usados como objeto direto, objeto indireto, complemento nominal, agente da passiva e adjunto adverbial.',
   },
 ];
 
 export default function Salvos() {
   const renderItem = ({ item }) => (
-    <View style={styles.card}>
+    <View style={styles.caixa}>
       <View style={styles.header}>
-        <Text style={styles.author}>Publicação de {item.author}</Text>
-        <Text style={styles.subject}> • {item.subject}</Text>
+        <Text style={styles.autor}>Publicação de {item.autor}</Text>
+        <Text style={styles.assunto}> • {item.assunto}</Text>
       </View>
-      <Text style={styles.content}>{item.content}</Text>
-      <TouchableOpacity style={styles.iconButton}>
+      <Text style={styles.info}>{item.info}</Text>
+      <TouchableOpacity style={styles.icon}>
         <Ionicons name="heart-outline" size={20} color="#A653EB" />
       </TouchableOpacity>
     </View>
@@ -33,12 +33,12 @@ export default function Salvos() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Salvos</Text>
+      <Text style={styles.titulo}>Salvos</Text>
       <FlatList
         data={data}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        contentContainerStyle={styles.listContainer}
+        contentContainerStyle={styles.lista}
       />
     </View>
   );
@@ -50,16 +50,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     padding: 16,
   },
-  title: {
+  titulo: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#333333',
     marginBottom: 16,
   },
-  listContainer: {
+  lista: {
     paddingBottom: 16,
   },
-  card: {
+  caixa: {
     backgroundColor: '#F7F7F7',
     borderRadius: 12,
     padding: 16,
@@ -75,21 +75,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 8,
   },
-  author: {
+  autor: {
     fontSize: 14,
     color: '#A653EB',
     fontWeight: 'bold',
   },
-  subject: {
+  assunto: {
     fontSize: 14,
     color: '#A653EB',
   },
-  content: {
+  info: {
     fontSize: 14,
     color: '#333333',
     marginBottom: 8,
   },
-  iconButton: {
+  icon: {
     alignSelf: 'flex-end',
   },
 });

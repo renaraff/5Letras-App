@@ -1,23 +1,14 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Picker } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default function PublicarConteudo() {
+export default function Publicar() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Publicar Conteúdo</Text>
-      <Text style={styles.subtitle}>Selecione uma matéria para publicar conteúdo</Text>
-      
-      <View style={styles.pickerContainer}>
-    
+      <Text style={styles.titulo}>Publicar Conteúdo</Text>
+      <Text style={styles.subtitulo}>Selecione uma matéria para publicar conteúdo</Text>
+      <View style={styles.materia}>
       </View>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Digite aqui..."
-        placeholderTextColor="#A0A0A0"
-        multiline
-      />
-
+      <TextInput style={styles.input} placeholder="Digite aqui..." placeholderTextColor="#A0A0A0" multiline />
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>PUBLICAR CONTEÚDO</Text>
       </TouchableOpacity>
@@ -33,34 +24,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     padding: 16,
   },
-  title: {
-    fontSize: 20,
+  titulo: {
+    fontSize: 27,
     fontWeight: 'bold',
     color: '#333333',
     marginBottom: 8,
   },
-  subtitle: {
+  subtitulo: {
     fontSize: 14,
     color: '#666666',
     marginBottom: 16,
   },
-  pickerContainer: {
+  materia: {
     borderWidth: 1,
-    borderColor: '#A0A0A0',
+    borderColor: '#5A97A4',
     borderRadius: 8,
     width: '100%',
     marginBottom: 16,
   },
-  picker: {
-    height: 40,
-    width: '100%',
-    color: '#666666',
-  },
   input: {
-    height: 200,
+    height: 450,
     width: '100%',
-    borderColor: '#A0A0A0',
-    borderWidth: 1,
+    borderWidth: 2.5,
+    borderColor: '#5A97A4',
     borderRadius: 8,
     padding: 10,
     textAlignVertical: 'top',
@@ -69,13 +55,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   button: {
-    backgroundColor: '#A653EB',
+    backgroundColor: '#8C52FF',
     borderRadius: 8,
     paddingVertical: 12,
     paddingHorizontal: 32,
   },
   buttonText: {
-    color: '#FFFFFF',
+    color: 'rgba(255, 255, 255, 0.73)',
     fontWeight: 'bold',
     fontSize: 16,
   },
