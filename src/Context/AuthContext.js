@@ -5,13 +5,13 @@ export const AuthContext = createContext(0);
 function AuthProvider({ children }) {
     const [login, setLogin ] = useState( false );
     const [cadastro, setCadastro ] = useState( false );
-    const [usuarioId, setUsuarioId] = useState(0);
+    const [usuario, setUsuario] = useState();
     const [error, setError] = useState(false);
 
     async function Login(email, senha) {      
         
         if (email != "" && senha != "") {
-            await fetch('http://10.139.75.47:5251/api/Usuarios/Login', {
+            await fetch( process.env.EXPO_PUBLIC_URL + '/api/Auth/Login', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -23,10 +23,12 @@ function AuthProvider({ children }) {
             })
                 .then(res => res.json())             
                 .then(json => {
+                    
                    if(json.usuarioId != 0)
                     {
+                        console.log( json );
                         setLogin(true);
-                        setUsuarioId(json.usuarioId);
+                        setUsuario(json);
                     }
                 })
                 .catch(err => setError(true))                
@@ -36,7 +38,7 @@ function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{  Login, login: login, setLogin, error: error, cadastro: cadastro, usuarioId:usuarioId, setCadastro }}>
+        <AuthContext.Provider value={{  Login, login: login, setLogin, error: error, cadastro: cadastro, usuario:usuario, setCadastro }}>
             {children}
         </AuthContext.Provider>
     )

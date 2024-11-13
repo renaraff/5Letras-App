@@ -25,11 +25,11 @@ const Tab = createBottomTabNavigator();
 
 export default function Rotas() {
 
-    /* const { logado } = useContext(AuthContext);
- 
-     if (!logado) {
-         return (<Login />)
-     }*/
+    const { login } = useContext(AuthContext);
+
+    if (!login) {
+        return (<Login />)
+    }
 
     return (
         <NavigationContainer>

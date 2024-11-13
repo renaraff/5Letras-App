@@ -44,8 +44,7 @@ export default function Login() {
             <Text style={styles.errotext}>Confire se seus dados estão corretos e tente novamente.</Text>
           </View>
         )}
-
-        <Text style={styles.cadastrotext} onPress={() => { setCadastro(true); setLogin(true); }}>
+        <Text style={styles.cadastrotext} onPress={() => { setCadastro(true); setLogin(false); }}>
           Não tem conta? Cadastre-se
         </Text>
       </View>
@@ -104,7 +103,7 @@ const styles = StyleSheet.create({
     borderRadius: 24,
   },
   btnText: {
-   color: 'rgba(255, 255, 255, 0.73)',
+    color: 'rgba(255, 255, 255, 0.73)',
     fontWeight: 'bold',
     fontSize: 16,
   },
