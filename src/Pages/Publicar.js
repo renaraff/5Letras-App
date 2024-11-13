@@ -1,17 +1,62 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 export default function Publicar() {
+
+  const [conteudoId, setConteudoId] = useState("");
+  const [professorId, setProfessorId] = useState("");
+  const [professorNome, setProfessorNome] = useState("");
+  const [materiasId, setMateriasId] = useState("");
+  const [materiasNome, setMateriasNome] = useState("");
+  const [conteudoTexto, setConteudoTexto] = useState("");
+  const [sucesso, setSucesso] = useState(false);
+
+  async function SalvarPublicacao() {
+    if (!conteudoTexto) {
+      Alert.alert('Erro', 'Confira todos os campos e tente novamente.');
+      return;
+    }
+
+    await fetch(process.env.EXPO_PUBLIC_URL + '/api/Conteudo/CreateConteudo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        conteudoId: conteudoId,
+        professorId: professorId,
+        professorNome: professorNome,
+        materiasId: materiasId,
+        materiasNome: materiasNome,
+        conteudoTexto: conteudoTexto
+      })
+    })
+      .then(res => res.json())
+      .then(json => {
+        setSucesso(true);
+        setConteudoTexto("");
+        setMateriasNome("");
+        setProfessorNome("");
+      })
+      .catch(err => console.log(err));
+  }
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Publicar Conteúdo</Text>
       <Text style={styles.subtitulo}>Selecione uma matéria para publicar conteúdo</Text>
       <View style={styles.materia}>
       </View>
-      <TextInput style={styles.input} placeholder="Digite aqui..." placeholderTextColor="#A0A0A0" multiline />
+      <TextInput style={styles.input} placeholder="Digite aqui..." placeholderTextColor="#A0A0A0" multiline value={conteudoTexto} onChangeText={(digitado) => setConteudoTexto(digitado)} />
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>PUBLICAR CONTEÚDO</Text>
+        <Text onPress={SalvarPublicacao} style={styles.buttonText}>PUBLICAR CONTEÚDO</Text>
       </TouchableOpacity>
+      {sucesso && (
+        <View>
+          <Text style={styles.sucessoTxt}>Publicação salva com sucesso!</Text>
+        </View>
+      )}
     </View>
   );
 }

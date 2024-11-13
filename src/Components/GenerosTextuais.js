@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+
 
 export default function GenerosTextuais() {
 
@@ -23,7 +23,7 @@ export default function GenerosTextuais() {
     <View style={styles.container}>
       <View style={styles.pesquisacaixa}>
         <TextInput style={styles.pesquisa} placeholder="Pesquisar" placeholderTextColor="#6B6B6B" />
-        <Icon name="search" size={20} color="#6B6B6B" style={styles.pesquisaicon} />
+      
       </View>
       <FlatList
         data={posts}
@@ -35,8 +35,7 @@ export default function GenerosTextuais() {
             <Text style={styles.categoria}>• {item.categoria}</Text>
             <Text style={styles.assunto}>{item.assunto}</Text>
             <View style={styles.iconcaixa}>
-              <Icon name="chatbubble-outline" size={20} color="#6B6B6B" style={styles.icon} />
-              <Icon name="heart-outline" size={20} color="#6B6B6B" style={styles.icon} />
+              
             </View>
           </View>
         )}

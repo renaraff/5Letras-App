@@ -7,6 +7,7 @@ function AuthProvider({ children }) {
     const [cadastro, setCadastro ] = useState( false );
     const [usuario, setUsuario] = useState();
     const [error, setError] = useState(false);
+    const [filtroMateria, setFiltroMateria ] = useState();
 
     async function Login(email, senha) {      
         
@@ -38,7 +39,7 @@ function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{  Login, login: login, setLogin, error: error, cadastro: cadastro, usuario:usuario, setCadastro }}>
+        <AuthContext.Provider value={{  Login, login: login, setLogin, error: error, cadastro: cadastro, usuario:usuario, setCadastro, filtroMateria: filtroMateria, setFiltroMateria: setFiltroMateria }}>
             {children}
         </AuthContext.Provider>
     )

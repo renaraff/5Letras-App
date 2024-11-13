@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet, FlatList } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import React, { useEffect, useState } from 'react'; 
+import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+
 
 export default function Home() {
 
@@ -22,23 +22,17 @@ export default function Home() {
             .catch( ( err ) => console.log( err ) )
     }
 
-
-
     useEffect(() => {
         getConteudo();
     }, []);
-
-
 
     return (
         <View style={styles.container}>
             { }
             <View style={styles.pesquisacaixa}>
                 <TextInput style={styles.pesquisa} placeholder="Pesquisar" placeholderTextColor="#6B6B6B" />
-                <Icon name="search" size={20} color="#6B6B6B" style={styles.pesquisaicon} />
+               
             </View>
-
-            { }
             <FlatList
                 data={conteudo}
                 keyExtractor={(item) => item.ConteudoId}
@@ -48,8 +42,7 @@ export default function Home() {
                         <Text style={styles.categoria}>• {item.Materia.MateriasNome}</Text>
                         <Text style={styles.assunto}>{item.ConteudoTexto}</Text>
                         <View style={styles.iconcaixa}>
-                            <Icon name="chatbubble-outline" size={20} color="#6B6B6B" style={styles.icon} />
-                            <Icon name="heart-outline" size={20} color="#6B6B6B" style={styles.icon} />
+                            
                         </View>
                     </View>
                 )}

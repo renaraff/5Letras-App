@@ -1,33 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 
-const data = [
-  {
-    id: '1',
-    autor: 'Valéria',
-    assunto: 'Literatura',
-    info: 'No Romantismo os autores valorizam a liberdade e expressam sentimento nacionalista. É recorrente na poesia e na prosa românticas a idealização da mulher e do amor, além da expressão do sofrimento amoroso. Estão presentes também elementos bucólicos e uma visão teocêntrica.',
-  },
-  {
-    id: '2',
-    autor: 'Adriana',
-    assunto: 'Gramática',
-    info: 'Morfologia são usados como objeto direto, objeto indireto, complemento nominal, agente da passiva e adjunto adverbial.',
-  },
-];
 
 export default function Salvos() {
+  const [favoritos, setFavoritos] = useState();
+
+
+  async function getFavoritos() {
+    fetch(process.env.EXPO_PUBLIC_URL + '/api/Conteudo/GetAllConteudos', {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        setFavoritos(json);
+    })
+      .catch((err) => console.log(err))
+  }
+
+  useEffect(() => {
+    getFavoritos();
+  }, []);
+
   const renderItem = ({ item }) => (
     <View style={styles.caixa}>
       <View style={styles.header}>
-        <Text style={styles.autor}>Publicação de {item.autor}</Text>
-        <Text style={styles.assunto}> • {item.assunto}</Text>
+        <Text style={styles.autor}>Publicação de {item.ProfessorNome}</Text>
+        <Text style={styles.assunto}>• {item.Materia.MateriasNome}</Text>
+        <Text style={styles.info}>{item.ConteudoTexto}</Text>
       </View>
-      <Text style={styles.info}>{item.info}</Text>
-      <TouchableOpacity style={styles.icon}>
-        <Ionicons name="heart-outline" size={20} color="#A653EB" />
-      </TouchableOpacity>
+      
     </View>
   );
 
@@ -35,7 +39,7 @@ export default function Salvos() {
     <View style={styles.container}>
       <Text style={styles.titulo}>Salvos</Text>
       <FlatList
-        data={data}
+        data={favoritos}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         contentContainerStyle={styles.lista}
@@ -76,18 +80,19 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   autor: {
+    color: '#A020F0',
+    fontWeight: '600',
     fontSize: 14,
-    color: '#A653EB',
-    fontWeight: 'bold',
   },
   assunto: {
-    fontSize: 14,
-    color: '#A653EB',
+    color: '#A020F0',
+    fontSize: 12,
+    marginBottom: 5,
   },
   info: {
+    color: '#333',
     fontSize: 14,
-    color: '#333333',
-    marginBottom: 8,
+    marginBottom: 10,
   },
   icon: {
     alignSelf: 'flex-end',

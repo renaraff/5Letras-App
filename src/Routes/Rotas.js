@@ -12,7 +12,6 @@ import Salvos from '../Pages/Salvos';
 import PerfilAluno from '../Pages/PerfilAluno';
 import Cadastro from '../Pages/Cadastro';
 import Login from '../Pages/Login';
-import PerfilProf from '../Pages/PerfilProfessor';
 
 
 import Avaliacoes from '../Components/Avaliacoes';
@@ -106,15 +105,7 @@ export default function Rotas() {
                         ),
                     }}
                 />
-                <Tab.Screen
-                    name="PerfilProf"
-                    component={PerfilProf}
-                    options={{
-                        tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="account" color={color} size={size} />
-                        ),
-                    }}
-                />
+                
             </Tab.Navigator>
         </NavigationContainer>
     )

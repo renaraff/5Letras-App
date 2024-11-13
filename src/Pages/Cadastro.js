@@ -1,20 +1,22 @@
-import React, { useContext, useState } from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { AuthContext } from '../Context/AuthContext';
 
 export default function Cadastro() {
 
     const [isAluno, setIsAluno] = useState(true);
     const [isProfessor, setIsProfessor] = useState(false);
-    const { setLogin, setCadastro } = useContext(AuthContext);
+    const {setLogin, setCadastro } = useContext(AuthContext);
     const [nome, setNome] = useState();
     const [email, setEmail] = useState();
+    const [graduacao, setGraduacao] = useState();
+    const [escolaridade, setEscolaridade] = useState();
     const [senha, setSenha] = useState();
+    const [descricao, setDescricao] = useState();
+    const [ocupacao, setOcupacao] = useState();
     const [erro, setErro] = useState(false);
 
-
     async function postUser() {
-
         if (!nome || !email || !senha) {
             Alert.alert('Erro', 'Confira todos os campos e tente novamente.');
             return;
@@ -28,7 +30,7 @@ export default function Cadastro() {
                     alunoNome: nome,
                     alunoEmail: email,
                     alunoSenha: senha,
-                    alunoEscolaridade: ""
+                    alunoEscolaridade: escolaridade
                 }),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -49,9 +51,9 @@ export default function Cadastro() {
                     professorNome: nome,
                     professorEmail: email,
                     professorSenha: senha,
-                    professorGraduacao: "",
-                    professorDescricao: "",
-                    professorOcupacao: ""
+                    professorGraduacao: graduacao,
+                    professorDescricao: descricao,
+                    professorOcupacao: ocupacao
                 }),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
@@ -65,12 +67,10 @@ export default function Cadastro() {
                     }
                 });
         }
-
     }
 
-
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.titulo}>Cadastre-se aqui</Text>
             <TextInput
                 placeholder="Nome"
@@ -95,6 +95,43 @@ export default function Cadastro() {
                 value={senha}
                 onChangeText={(digitado) => setSenha(digitado)}
             />
+
+            {isAluno && (
+                <TextInput
+                    placeholder="Escolaridade"
+                    style={styles.input}
+                    placeholderTextColor="#87B2BF"
+                    value={escolaridade}
+                    onChangeText={(digitado) => setEscolaridade(digitado)}
+                />
+            )}
+
+            {isProfessor && (
+                <>
+                    <TextInput
+                        placeholder="Graduação"
+                        style={styles.input}
+                        placeholderTextColor="#87B2BF"
+                        value={graduacao}
+                        onChangeText={(digitado) => setGraduacao(digitado)}
+                    />
+                    <TextInput
+                        placeholder="Breve descrição sobre você"
+                        style={styles.input}
+                        placeholderTextColor="#87B2BF"
+                        value={descricao}
+                        onChangeText={(digitado) => setDescricao(digitado)}
+                    />
+                    <TextInput
+                        placeholder="Sua ocupação"
+                        style={styles.input}
+                        placeholderTextColor="#87B2BF"
+                        value={ocupacao}
+                        onChangeText={(digitado) => setOcupacao(digitado)}
+                    />
+                </>
+            )}
+
             <Text style={styles.pergunta}>Você é aluno ou professor?</Text>
             <View style={styles.btncaixa}>
                 <TouchableOpacity
@@ -115,25 +152,21 @@ export default function Cadastro() {
                     <Text style={[styles.btntext, isProfessor && styles.btnselecionadotext]}>Professor</Text>
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.btnanexo}>
-                <Text style={styles.btnanexotext}>Anexe seu certificado de graduação</Text>
-            </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={postUser}>
                 <Text style={styles.btn}>CRIAR CONTA</Text>
             </TouchableOpacity>
             <Text style={styles.cadastroText} onPress={() => { setCadastro(true); setLogin(false); }}>Já possui uma conta? Entre</Text>
-        </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: '40%',
+        marginTop: '20%',
         marginLeft: '4%',
         backgroundColor: '#fff',
         borderRadius: 10,
         padding: 20,
-        alignItems: 'center',
         width: '93%',
         maxWidth: 400,
         elevation: 4,
@@ -154,7 +187,6 @@ const styles = StyleSheet.create({
         borderWidth: 2.5,
         borderColor: '#5A97A4',
         borderRadius: 10,
-        border: 2,
         paddingHorizontal: 15,
         marginBottom: 15,
         fontSize: 16,
@@ -189,7 +221,6 @@ const styles = StyleSheet.create({
     btn: {
         color: 'rgba(255, 255, 255, 0.73)',
         fontWeight: 'bold'
-
     },
     btntext: {
         fontSize: 14,
@@ -197,21 +228,6 @@ const styles = StyleSheet.create({
     },
     btnselecionadotext: {
         color: '#ffffff',
-    },
-    btnanexo: {
-        width: '100%',
-        height: 40,
-        borderWidth: 2.5,
-        borderColor: '#5A97A4',
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 14,
-        marginBottom: 30,
-    },
-    btnanexotext: {
-        fontSize: 14,
-        color: '#6e6e6e',
     },
     button: {
         width: '40%',
