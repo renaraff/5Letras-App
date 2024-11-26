@@ -1,48 +1,54 @@
-import React, { useEffect, useState } from 'react';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-
+import { AuthContext } from '../Context/AuthContext';
 
 export default function Salvos() {
-  const [favoritos, setFavoritos] = useState();
+  const [favoritos, setFavoritos] = useState([]);
 
+  const{curtidos, setCurtidos} = useContext( AuthContext );
 
-  async function getFavoritos() {
-    fetch(process.env.EXPO_PUBLIC_URL + '/api/Conteudo/GetAllConteudos', {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        setFavoritos(json);
-    })
-      .catch((err) => console.log(err))
+  function addCurtidos(item)
+  {
+    const existe = curtidos.find( value => value.ConteudoId == item.ConteudoId );
+    if( existe ) {
+      const filter = curtidos.filter( value => value.ConteudoId != item.ConteudoId );
+      setCurtidos( filter );
+    } else {
+      const update = [...curtidos, item ];
+      setCurtidos( update );
+    }
   }
 
-  useEffect(() => {
-    getFavoritos();
-  }, []);
+  
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item, index }) => (
     <View style={styles.caixa}>
-      <View style={styles.header}>
-        <Text style={styles.autor}>Publicação de {item.ProfessorNome}</Text>
-        <Text style={styles.assunto}>• {item.Materia.MateriasNome}</Text>
-        <Text style={styles.info}>{item.ConteudoTexto}</Text>
+      <Text style={styles.user}>Publicação de {item.ProfessorNome}</Text>
+      <Text style={styles.categoria}>• {item.Materia.MateriasNome}</Text>
+      <Text style={styles.assunto}>{item.ConteudoTexto}</Text>
+      <View style={styles.iconcaixa}>
+        <TouchableOpacity onPress={() => addCurtidos(item)} style={styles.icon}>
+          <FontAwesome
+            name={curtidos.find( value => value.ConteudoId == item.ConteudoId ) ? 'heart' : 'heart-o'}
+            size={20}  style={styles.coracao}
+            color={curtidos.find( value => value.ConteudoId == item.ConteudoId ) ? '#FF6666' : '#B0B0B0'}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.icon}>
+          <MaterialIcons name="comment" size={20} color="#B0B0B0" />
+        </TouchableOpacity>
       </View>
-      
     </View>
   );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Salvos</Text>
       <FlatList
-        data={favoritos}
+        data={curtidos}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
-        contentContainerStyle={styles.lista}
       />
     </View>
   );
@@ -52,49 +58,44 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    padding: 16,
-  },
-  titulo: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333333',
-    marginBottom: 16,
-  },
-  lista: {
-    paddingBottom: 16,
+    paddingHorizontal: 20,
+    paddingTop: 40,
   },
   caixa: {
-    backgroundColor: '#F7F7F7',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 16,
+    backgroundColor: '#F5F5F5',
+    borderRadius: 15,
+    padding: 15,
+    marginBottom: 15,
+    elevation: 5,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 10,
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  autor: {
+  user: {
     color: '#A020F0',
     fontWeight: '600',
     fontSize: 14,
   },
-  assunto: {
+  categoria: {
     color: '#A020F0',
     fontSize: 12,
     marginBottom: 5,
   },
-  info: {
+  assunto: {
     color: '#333',
     fontSize: 14,
     marginBottom: 10,
   },
+  iconcaixa: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
   icon: {
-    alignSelf: 'flex-end',
+    paddingHorizontal: 10,
+  },
+  coracao: {
+    marginLeft: '93.5%'
   },
 });

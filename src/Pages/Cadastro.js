@@ -6,7 +6,7 @@ export default function Cadastro() {
 
     const [isAluno, setIsAluno] = useState(true);
     const [isProfessor, setIsProfessor] = useState(false);
-    const {setLogin, setCadastro } = useContext(AuthContext);
+    const { setLogin, setCadastro, Login, error, login, cadastro } = useContext(AuthContext);
     const [nome, setNome] = useState();
     const [email, setEmail] = useState();
     const [graduacao, setGraduacao] = useState();
@@ -70,7 +70,7 @@ export default function Cadastro() {
     }
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView contentContainerStyle={[styles.container]}>
             <Text style={styles.titulo}>Cadastre-se aqui</Text>
             <TextInput
                 placeholder="Nome"
@@ -155,7 +155,6 @@ export default function Cadastro() {
             <TouchableOpacity style={styles.button} onPress={postUser}>
                 <Text style={styles.btn}>CRIAR CONTA</Text>
             </TouchableOpacity>
-            <Text style={styles.cadastroText} onPress={() => { setCadastro(true); setLogin(false); }}>Já possui uma conta? Entre</Text>
         </ScrollView>
     );
 }
@@ -174,6 +173,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 3,
+  
     },
     titulo: {
         fontSize: 30,
@@ -243,4 +243,4 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         textDecorationLine: 'underline',
     },
-});
+}); 

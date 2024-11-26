@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { AuthContext } from '../Context/AuthContext';
 
-export default function PerfilAluno() {
+export default function Perfil() {
 
     const [tipoUsuario, setTipoUsuario] = useState();
     const [usuarioCompleto, setUsuarioCompleto] = useState();
@@ -26,8 +26,6 @@ export default function PerfilAluno() {
             .catch((err) => console.log(err))
     }
 
-
-
     useEffect(() => {
         if (usuario.usuarioTipo) {
             setTipoUsuario(usuario.usuarioTipo);
@@ -48,9 +46,6 @@ export default function PerfilAluno() {
                     {tipoUsuario == "professor" &&
                         <Text>{usuarioCompleto.professorGraduacao}</Text>
                     }
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttontext}>EDITAR PERFIL</Text>
-                    </TouchableOpacity>
                 </View>
                 :
                 <ActivityIndicator size="large" />
@@ -95,19 +90,6 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#87B2BF',
         marginBottom: 4,
-    },
-    button: {
-        backgroundColor: '#A653EB',
-        borderRadius: 20,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        marginTop: 16,
-        marginBottom: 24,
-    },
-    buttontext: {
-        color: 'rgba(255, 255, 255, 0.73)',
-        fontWeight: 'bold',
-        fontSize: 16,
     },
     subtitulo: {
         fontSize: 30,

@@ -8,10 +8,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 export default function Materias() {
   const [materia, setMateria] = useState();
   const[conteudo, setConteudo  ] = useState();
+  const [ filtro, setFiltro ] = useState();
 
   const { filtroMateria, setFiltroMateria } = useContext(AuthContext);
-
-  console.log(filtroMateria);
 
   async function getMateria() {
     fetch(process.env.EXPO_PUBLIC_URL + '/api/Materias/GetAllMaterias', {
@@ -32,7 +31,12 @@ export default function Materias() {
   }, []);
 
   useEffect(() => {
-    console.log(filtroMateria);
+    if( filtroMateria ) {
+      const filtro = conteudo.filter( value => value.Materia.MateriasId == filtroMateria );
+      setFiltro( filtro );
+    } else {
+      setFiltro([]);
+    }
   }, [filtroMateria])
 
   async function getConteudo() {
@@ -76,7 +80,7 @@ export default function Materias() {
           <MaterialCommunityIcons style={[styles.botao]} name="arrow-left" />
         </TouchableOpacity>
           <FlatList
-            data={conteudo}
+            data={filtro}
             keyExtractor={(item) => item.ConteudoId}
             renderItem={({ item }) => (
               <View style={styles.caixa}>

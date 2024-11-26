@@ -6,7 +6,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [sucesso, setSucesso] = useState(false);
   const [senha, setSenha] = useState("");
-  const { Login, setCadastro, setLogin, error } = useContext(AuthContext);
+  const { setLogin, setCadastro, Login, error, login, cadastro } = useContext(AuthContext);
 
   function RealizaLogin() {
     Login(email, senha);
@@ -44,7 +44,7 @@ export default function Login() {
             <Text style={styles.errotext}>Confire se seus dados estão corretos e tente novamente.</Text>
           </View>
         )}
-        <Text style={styles.cadastrotext} onPress={() => { setCadastro(true); setLogin(false); }}>Não tem conta? Cadastre-se</Text>
+         <View><Text style={styles.cadastrotext} onPress={() => { setCadastro(true); setLogin(false); }}>Não tem conta? Cadastre-se</Text></View>
         {sucesso && (
           <View>
             <Text style={styles.sucessoTxt}>Publicação salva com sucesso!</Text>
